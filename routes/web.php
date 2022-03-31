@@ -13,39 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-/* Route::get('/', function () {
+Route::get('/', function () {
     return view('welcome');
-});
-
-Route::get('/index', function () {
-    return view('admin.index');
-});
-Route::get('/login', function () {
-    return view('admin.login');
-});
-Route::get('/password', function () {
-    return view('admin.password');
-});
-
-Route::get('/register' , function () {
-    return view ('admin.register');
-});
- */
-
-
-Route::group(['prefix' => 'admin'], function() {
-    //
-    Route::get('/index', function () {
-        return view('admin.index');
-    })->middleware('admin');
-    Route::get('/login', function () {
-        return view('admin.login');
-    })->middleware('admin');
-    Route::get('/password', function () {
-        return view('admin.password');
-    })->middleware('admin');
-    
-    Route::get('/register' , function () {
-        return view ('admin.register');
-    });
 });
