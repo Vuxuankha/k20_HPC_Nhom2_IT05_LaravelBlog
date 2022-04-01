@@ -1,7 +1,6 @@
 <?php
-
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,39 +12,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-/* Route::get('/', function () {
+Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/index', function () {
-    return view('admin.index');
-});
-Route::get('/login', function () {
-    return view('admin.login');
-});
-Route::get('/password', function () {
-    return view('admin.password');
-});
+Auth::routes();
 
-Route::get('/register' , function () {
-    return view ('admin.register');
-});
- */
+Route::get('/home', 'HomeController@index')->name('home');
 
-
-Route::group(['prefix' => 'admin'], function() {
-    //
-    Route::get('/index', function () {
-        return view('admin.index');
-    })->middleware('admin');
-    Route::get('/login', function () {
-        return view('admin.login');
-    })->middleware('admin');
-    Route::get('/password', function () {
-        return view('admin.password');
-    })->middleware('admin');
-    
-    Route::get('/register' , function () {
-        return view ('admin.register');
-    });
-});
+Route::get('/passwords/reset', [App\Http\Controllers\Auth\ResetPasswordController::class, 'reset'])->name('passwords.reset');
