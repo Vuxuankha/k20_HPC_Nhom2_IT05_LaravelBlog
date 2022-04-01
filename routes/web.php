@@ -21,3 +21,4 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/passwords/reset', [App\Http\Controllers\Auth\ResetPasswordController::class, 'reset'])->name('passwords.reset');
+Route::resource('products','ProductController');
