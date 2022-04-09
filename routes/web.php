@@ -1,6 +1,13 @@
 <?php
+
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Auth;
+
+use App\Http\Controllers\ProductController;
+
+use App\Http\Controllers\ProfileController;
+
+use App\Http\Controllers\HomeController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,10 +22,26 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/welcome', function () {
+    return view('welcome');
+});
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+// HomePage//
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
 
-Route::get('/passwords/reset', [App\Http\Controllers\Auth\ResetPasswordController::class, 'reset'])->name('passwords.reset');
-Route::resource('products','ProductController');
+// Account settings //
+Route::get('/settings-account', [App\Http\Controllers\ProfileController::class, 'account'])->name('settings-account');
+Route::get('/settings-connections', [App\Http\Controllers\ProfileController::class, 'connections'])->name('settings-connections');
+Route::get('/settings-notifications', [App\Http\Controllers\ProfileController::class, 'notifications'])->name('settings-notifications');
+
+// Maintenance and Error //
+Route::get('/under-maintenance', [App\Http\Controllers\MaintenanceController::class, 'maintenance'])->name('under-maintenance');
+
+// Products //
+Route::resource('products', ProductController::class);
+Route::get('/products.index', [App\Http\Controllers\ProductController::class, 'index'])->name('Products');
+
+
+

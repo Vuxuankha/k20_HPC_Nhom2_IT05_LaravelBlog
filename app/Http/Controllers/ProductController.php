@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Product;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -14,13 +14,12 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
         $products = Product::latest()->paginate(5);
   
         return view('products.index',compact('products'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
     }
-
+   
     /**
      * Show the form for creating a new resource.
      *
@@ -28,10 +27,9 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
         return view('products.create');
     }
-
+  
     /**
      * Store a newly created resource in storage.
      *
@@ -40,7 +38,6 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
         $request->validate([
             'name' => 'required',
             'detail' => 'required',
@@ -51,7 +48,7 @@ class ProductController extends Controller
         return redirect()->route('products.index')
                         ->with('success','Product created successfully.');
     }
-
+   
     /**
      * Display the specified resource.
      *
@@ -60,10 +57,9 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        //
         return view('products.show',compact('product'));
     }
-
+   
     /**
      * Show the form for editing the specified resource.
      *
@@ -72,10 +68,9 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
         return view('products.edit',compact('product'));
     }
-
+  
     /**
      * Update the specified resource in storage.
      *
@@ -85,7 +80,6 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
         $request->validate([
             'name' => 'required',
             'detail' => 'required',
@@ -96,7 +90,7 @@ class ProductController extends Controller
         return redirect()->route('products.index')
                         ->with('success','Product updated successfully');
     }
-
+  
     /**
      * Remove the specified resource from storage.
      *
@@ -105,7 +99,6 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
         $product->delete();
   
         return redirect()->route('products.index')
